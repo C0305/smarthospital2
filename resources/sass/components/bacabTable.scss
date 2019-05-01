@@ -1,0 +1,29 @@
+.bacab-table {
+  &__header-container {
+    display: grid;
+    grid-template-rows: repeat(2, 50%);
+    grid-template-columns: 100%;
+    grid-auto-flow: row;
+
+
+    .cell {
+      display: grid;
+    }
+
+    &__item {
+      align-self: center;
+      justify-self: center;
+
+      &--marign-top {
+        margin-top: 5px;
+      }
+
+      &--full-width {
+        width: 100%
+      }
+    }
+  }
+  &--height {
+    height: calc(100vh - 280px);
+  }
+}
