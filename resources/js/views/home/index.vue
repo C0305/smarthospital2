@@ -153,13 +153,14 @@
                         <div class="settings__block"><i class="fas fa-cog"></i></div>
                     </div>
                 </div>
+                <div id="chartdiv"></div>
             </div>
         </div> <!-- /.main-cards -->
     </div>
 </template>
 
 <script>
-    import Layout from '../../ui/global/mixins/Layout';
+    import Layout from '../../global/mixins/Layout';
     import BacabHomeMainHeader from "./components/bacabHomeMainHeader";
     export default {
         name: "home",

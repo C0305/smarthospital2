@@ -1,4 +1,4 @@
-<template>
+ <template>
     <div>
         <bacab-aside :close-function="closeProject" :name="bacabAsideText" v-if="asideOpenClose === true">
             <template slot="content">
@@ -233,8 +233,8 @@
 </template>
 
 <script>
-    import BacabAside from "../../ui/components/bacabAside";
-    import aside from "../../ui/global/mixins/aside";
+    import BacabAside from "../../components/bacabAside";
+    import aside from "../../global/mixins/aside";
     export default {
         name: "index",
         mixins: [ aside ],

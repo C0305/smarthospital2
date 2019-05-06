@@ -293,16 +293,14 @@
 </template>
 
 <script>
-    import BacabTables from "../../../ui/components/bacabTables";
-    import BacabAside from "../../../ui/components/bacabAside";
-    import aside from "../../../ui/global/mixins/aside";
-    import general from "../../../ui/global/mixins/general";
-    import tables from "../../../ui/global/mixins/tables";
-    import tablesMethod from "../../../ui/global/mixins/tablesMethods";
-    import cloneDeep from 'lodash';
-    import moment from 'moment';
-    import BacabTableAge from "../../../ui/global/accessors/bacabTableAge";
-    import BacabTableSex from "../../../ui/global/accessors/bacabTableSex";
+    import BacabTables from "../../../components/bacabTables";
+    import BacabAside from "../../../components/bacabAside";
+    import aside from "../../../global/mixins/aside";
+    import general from "../../../global/mixins/general";
+    import tables from "../../../global/mixins/tables";
+    import tablesMethod from "../../../global/mixins/tablesMethods";
+    import BacabTableAge from "../../../global/accessors/bacabTableAge";
+    import BacabTableSex from "../../../global/accessors/bacabTableSex";
     export default {
         name: "index",
         mixins: [ aside, general, tables, tablesMethod],

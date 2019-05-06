@@ -19,4 +19,8 @@
         <div id="app">
         </div>
     </body>
+    <script>
+        /* Scripts for css grid dashboard */
+    
+    </script>
 </html>
