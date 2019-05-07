@@ -21,7 +21,7 @@
                     <span class="navList__subheading-title">{{ item.name }}</span>
                 </div>
                 <ul  class="subList subList--hidden" >
-                    <li v-for="(itemm) in item.childs" :key="item.id" click="open(itemm.route,itemm.name)"class="subList__item"><span class="far fa-dot-circle"></span>{{' '+itemm.name }}</li>
+                    <li v-for="(itemm) in item.childs" :key="itemm.id" @click="open(itemm.route,itemm.name)"class="subList__item"><span class="far fa-dot-circle"></span>{{' '+itemm.name }}</li>
                 </ul>
             </template>
 

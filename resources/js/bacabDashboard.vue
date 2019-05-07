@@ -125,7 +125,7 @@
                 addResizeListeners();
                 setSidenavListeners();
                 setUserDropdownListener();
-                renderChart();
+                //renderChart();
                 setMenuClickListener();
                 setSidenavCloseListener();
             });
@@ -156,25 +156,30 @@
 
             // Sidenav list sliding functionality
             function setSidenavListeners() {
-                const subHeadings = $('.navList__subheading'); console.log('subHeadings: ', subHeadings);
-                const SUBHEADING_OPEN_CLASS = 'navList__subheading--open';
-                const SUBLIST_HIDDEN_CLASS = 'subList--hidden';
+                setTimeout(() => {
+                    const subHeadings = $('.navList__subheading'); console.log('subHeadings: ', subHeadings);
+                    const SUBHEADING_OPEN_CLASS = 'navList__subheading--open';
+                    const SUBLIST_HIDDEN_CLASS = 'subList--hidden';
+                    return new Promise((response, reject) => {
 
-                subHeadings.each((i, subHeadingEl) => {
-                    $(subHeadingEl).on('click', (e) => {
-                        const subListEl = $(subHeadingEl).siblings();
+                            subHeadings.each((i, subHeadingEl) => {
+                                $(subHeadingEl).on('click', (e) => {
+                                    const subListEl = $(subHeadingEl).siblings();
 
-                        // Add/remove selected styles to list category heading
-                        if (subHeadingEl) {
-                            toggleClass($(subHeadingEl), SUBHEADING_OPEN_CLASS);
-                        }
+                                    // Add/remove selected styles to list category heading
+                                    if (subHeadingEl) {
+                                        toggleClass($(subHeadingEl), SUBHEADING_OPEN_CLASS);
+                                    }
 
-                        // Reveal/hide the sublist
-                        if (subListEl && subListEl.length === 1) {
-                            toggleClass($(subListEl), SUBLIST_HIDDEN_CLASS);
-                        }
-                    });
-                });
+                                    // Reveal/hide the sublist
+                                    if (subListEl && subListEl.length === 1) {
+                                        toggleClass($(subListEl), SUBLIST_HIDDEN_CLASS);
+                                    }
+                                });
+                            });
+
+                    } )
+                },1000);
             }
 
             // Draw the chart

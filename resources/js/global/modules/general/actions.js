@@ -1,6 +1,8 @@
 export default {
-    bacabAsideOpenClose(context, payload){
-        context.commit('bacabAsideOpenClose', payload)
+    async bacabAsideOpenClose(context, payload){
+        return new Promise((resolve,reject)=> {
+            context.commit('bacabAsideOpenClose', payload)
+        });
     },
 
     async bacabFirstData(context) {
@@ -15,7 +17,7 @@ export default {
             });
         })
     },
-    bacabUpdateValue(context, payload){
+    async bacabUpdateValue(context, payload){
         context.commit('bacabUpdateValue',payload);
     }
 }

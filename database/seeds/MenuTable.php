@@ -52,6 +52,54 @@ class MenuTable extends Seeder
                     ]
                 ]
             ],
+	        [
+		        'name' => 'CMMS',
+		        'icon' => 'icon  fas fa-tools',
+		        'childs' => [
+			        [
+				        'name' => 'Catalogo De Modelos',
+				        'path' => '/cmms/modelsInventory',
+				        'icon' => 'fas fa-project-diagram',
+				        'permission' => 'Ver Inventario de equipos',
+				        'childs'=> null,
+			        ],
+//                    [
+//                        'name' => 'Inventario de equipos',
+//                        'path' => '/cmms/equipmentInventory',
+//                        'icon' => 'fas fa-project-diagram',
+//                        'permission' => 'Ver Inventario de equipos',
+//                        'childs'=> null,
+//                    ],
+//                    [
+//                        'name' => 'Inventario y gestión de repuestos',
+//                        'path' => '/cmms/inventoryAndManagementOfSpareParts',
+//                        'icon' => 'fas fa-project-diagram',
+//                        'permission' => 'Ver Inventario y gestión de repuestos',
+//                        'childs' => null,
+//                    ],
+//                    [
+//                        'name' => 'Inventario y gestion de Herramientas',
+//                        'path' => '/cmms/inventoryAndManagementOfTools',
+//                        'icon' => 'fas fa-project-diagram',
+//                        'permission' => 'Ver Inventario y gestion de Herramientas',
+//                        'childs' => null,
+//                    ],
+//	                [
+//		                'name' => 'Mantenimientos',
+//		                'path' => '/cmms/maintenance',
+//		                'icon' => 'fas fa-project-diagram',
+//		                'permission' => 'Ver Mantenimientos',
+//		                'childs'  => null,
+//	                ],
+//	                [
+//		                'name' => 'Gestión de Contratos',
+//		                'path' => '/cmms/contractManagement',
+//		                'icon' => 'fas fa-project-diagram',
+//		                'permission' => 'Ver Gestión de Contratos',
+//		                'childs'  => null,
+//	                ],
+		        ]
+	        ],
             [
                 'name' => 'Ajustes',
                 'icon' => 'icon  fas fa-cog',
@@ -79,47 +127,7 @@ class MenuTable extends Seeder
                     ]
                 ]
             ],
-	        [
-                'name' => 'CMMS',
-                'icon' => 'icon  fas fa-tools',
-                'childs' => [
-                    [
-                        'name' => 'Inventario de equipos',
-                        'path' => '/cmms/equipmentInventory',
-                        'icon' => 'fas fa-project-diagram',
-                        'permission' => 'Ver Inventario de equipos',
-                        'childs'=> null,
-                    ],
-                    [
-                        'name' => 'Inventario y gestión de repuestos',
-                        'path' => '/cmms/inventoryAndManagementOfSpareParts',
-                        'icon' => 'fas fa-project-diagram',
-                        'permission' => 'Ver Inventario y gestión de repuestos',
-                        'childs' => null,
-                    ],
-                    [
-                        'name' => 'Inventario y gestion de Herramientas',
-                        'path' => '/cmms/inventoryAndManagementOfTools',
-                        'icon' => 'fas fa-project-diagram',
-                        'permission' => 'Ver Inventario y gestion de Herramientas',
-                        'childs' => null,
-                    ],
-	                [
-		                'name' => 'Mantenimientos',
-		                'path' => '/cmms/maintenance',
-		                'icon' => 'fas fa-project-diagram',
-		                'permission' => 'Ver Mantenimientos',
-		                'childs'  => null,
-	                ],
-	                [
-		                'name' => 'Gestión de Contratos',
-		                'path' => '/cmms/contractManagement',
-		                'icon' => 'fas fa-project-diagram',
-		                'permission' => 'Ver Gestión de Contratos',
-		                'childs'  => null,
-	                ],
-                ]
-            ],
+	        
 	        
         ];
 
