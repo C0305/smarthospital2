@@ -3,6 +3,11 @@
         <div class="box__header">
             <!--Paginator-->
             <h3 class="box__title">{{ title }}</h3>
+            <div class="header-buttons__main-buttons">
+                <el-tooltip class="item" effect="dark" content="Recargar Datos de La Tabla" placement="top-start">
+                    <el-button @click="queryMethod()" icon="el-icon-refresh" circle></el-button>
+                </el-tooltip>
+            </div>
             <div class="header-buttons__secondary-buttons">
                 <el-pagination
                         @size-change="queryMethod()"
@@ -20,7 +25,7 @@
                     :data="dataArray"
                     v-loading="loading"
                     highlight-current-row
-                    :max-height="tableHeight"
+                    :height="tableHeight"
                     border>
 
                 <!--Index-->
@@ -104,6 +109,10 @@
                         <!--Body Slot-->
                         <template slot-scope="props" v-if="column.body != null && column.body.slot != null && column.body.type === 'slot'">
                                 <slot v-bind="props" :name="column.body.slot "></slot>
+                        </template>
+
+                        <template slot-scope="obj" v-if="column.body != null && column.body.type === 'text'">
+                            {{ obj.row[column.body.prop] }}
                         </template>
                     </el-table-column>
 
@@ -192,7 +201,9 @@
                 this.config = cloneDeep(this.tableConfig);
                 if(arrayList.tableWidth<(arrayList.windowWidth - 20)){
                     arrayList.includeList.forEach(item => {
-                        this.config[item].header.width = 'auto'
+                        if(this.config[item].header.name !== 'Acciones' || this.config[item].header.name !== 'Actions'){
+                            this.config[item].header.width = 'auto'
+                        }
                     })
                 }
             },
@@ -216,6 +227,7 @@
             },
             setHeight(){
                 this.tableHeight =  ($(window).height())-290;
+                console.log(this.tableHeight)
             },
             indexFunction(index){
                 return index * this.from;
@@ -229,32 +241,36 @@
                    }
                 });
             },
-            queryMethod() {
+            async queryMethod() {
                 let now = new Date();
-                if (now - this.lastSearch > 900) {
-                    this.lastSearch = now;
-                    this.loading = true;
-                    let filters = cloneDeep(this.filters);
-                    filters = qs.stringify(filters);
-                    let url = this.remoteUrl + '?page=' + this.currentPage;
-                    axios.get(url + '&' + filters).then((response) => {
-                        if (this.dataManipulationMethod) {
-                            this.from = response.data.from;
-                            this.totalRecords = response.data.total;
-                            this.dataArray = this.dataManipulationMethod(response.data.data);
+
+                return new Promise(async (resolve, reject) => {
+                    if (now - this.lastSearch > 900) {
+                        this.lastSearch = now;
+                        this.loading = true;
+                        let filters = cloneDeep(this.filters);
+                        filters = qs.stringify(filters);
+                        let url = this.remoteUrl + '?page=' + this.currentPage;
+                        await axios.get(url + '&' + filters).then((response) => {
+                            if (this.dataManipulationMethod) {
+                                this.from = response.data.from;
+                                this.totalRecords = response.data.total;
+                                this.dataArray = this.dataManipulationMethod(response.data.data);
+                                this.loading = false;
+                            } else {
+                                this.from = response.data.from;
+                                this.totalRecords = response.data.total;
+                                this.dataArray = response.data.data;
+                                this.loading = false;
+                            }
+                            console.log('load');
+                        }).catch(response => {
+                            this.$message.error('Error al cargar los datos');
                             this.loading = false;
-                        } else {
-                            this.from = response.data.from;
-                            this.totalRecords = response.data.total;
-                            this.dataArray = response.data.data;
-                            this.loading = false;
-                        }
-                    }).catch(response => {
-                        this.$message.error('Error al cargar los datos');
-                        this.loading = false;
-                        console.error('ERROR ' + response);
-                    });
-                }
+                            console.error('ERROR ' + response);
+                        });
+                    }
+                })
             }
         },
         name: "bacabTables"
