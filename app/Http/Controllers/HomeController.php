@@ -43,9 +43,19 @@ class HomeController extends Controller
 		    'mexicoStates' => MexicoState::select('id','federal_entity as label')->get(),
 		    'menu' => $this->getMenu(),
 		    'locale' => $this->getLocale(),
+		    'routes' => $this->getRoutes(),
 	    ];
 	
 	    return $data;
+    }
+    
+    private function getRoutes()
+    {
+        return [
+            'cmms' => [
+            	'brands' => '/web/cmms/brands'
+            ]
+        ];
     }
     
     private function getLocale()
@@ -55,7 +65,7 @@ class HomeController extends Controller
         ];
     }
 	
-	public function getMenu() {
+	private function getMenu() {
 		$userPermissions = auth()->user()->getAllPermissions();
 		$viewPermissions = [];
 		foreach ($userPermissions as $permission){
