@@ -12,53 +12,53 @@ class MenuTable extends Seeder
     public function run()
     {
         $menuItems =  [
-            [
-            'name' => 'Pacientes',
-            'icon' => 'icon  fas fa-male',
-            'childs' => [
-                    [
-                        'name' => 'Listado de Pacientes',
-                        'path' => '/patients',
-                        'icon' => 'fas fa-project-diagram',
-                        'permission' => 'Ver Pacientes',
-                        'childs' => null,
-                    ]
-                ]
-            ],
-            [
-                'name' => 'Quirofano',
-                'icon' => 'icon  fas fa-procedures',
-                'childs' => [
-                    [
-                        'name' => 'Listado de Procedimientos',
-                        'path' => '/or/types',
-                        'icon' => 'fas fa-project-diagram',
-                        'permission' => 'Ver Procedimientos',
-                        'childs' => null,
-                    ],
-                    [
-                        'name' => 'Tipo de procedimientos',
-                        'path' => '/projects',
-                        'icon' => 'fas fa-project-diagram',
-                        'permission' => 'Ver Tipos de Procedimientos',
-                        'childs' => null,
-                    ],
-                    [
-                        'name' => 'Salas (Ubicaciónes)',
-                        'path' => '/projects',
-                        'icon' => 'fas fa-project-diagram',
-                        'permission' => 'Ver Quirófanos',
-                        'childs'  => null,
-                    ]
-                ]
-            ],
+//            [
+//            'name' => 'Pacientes',
+//            'icon' => 'icon  fas fa-male',
+//            'childs' => [
+//                    [
+//                        'name' => 'Listado de Pacientes',
+//                        'path' => '/patients',
+//                        'icon' => 'fas fa-project-diagram',
+//                        'permission' => 'Ver Pacientes',
+//                        'childs' => null,
+//                    ]
+//                ]
+//            ],
+//            [
+//                'name' => 'Quirofano',
+//                'icon' => 'icon  fas fa-procedures',
+//                'childs' => [
+//                    [
+//                        'name' => 'Listado de Procedimientos',
+//                        'path' => '/or/types',
+//                        'icon' => 'fas fa-project-diagram',
+//                        'permission' => 'Ver Procedimientos',
+//                        'childs' => null,
+//                    ],
+//                    [
+//                        'name' => 'Tipo de procedimientos',
+//                        'path' => '/projects',
+//                        'icon' => 'fas fa-project-diagram',
+//                        'permission' => 'Ver Tipos de Procedimientos',
+//                        'childs' => null,
+//                    ],
+//                    [
+//                        'name' => 'Salas (Ubicaciónes)',
+//                        'path' => '/projects',
+//                        'icon' => 'fas fa-project-diagram',
+//                        'permission' => 'Ver Quirófanos',
+//                        'childs'  => null,
+//                    ]
+//                ]
+//            ],
 	        [
 		        'name' => 'CMMS',
 		        'icon' => 'icon  fas fa-tools',
 		        'childs' => [
 			        [
-				        'name' => 'Catalogo De Modelos',
-				        'path' => '/cmms/modelsInventory',
+				        'name' => 'Catalogo De Marcas',
+				        'path' => '/cmms/brandsInventory',
 				        'icon' => 'fas fa-project-diagram',
 				        'permission' => 'Ver Inventario de equipos',
 				        'childs'=> null,
