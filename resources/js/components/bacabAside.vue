@@ -41,6 +41,7 @@
             saveButtonFunction: Function,
             name: String,
             closeFunction: Function,
+            closeProp: String,
         },
         data(){
             return {
@@ -63,26 +64,33 @@
                     if(this.closeFunction != null){
                         this.closeFunction();
                     }
-                    this.closeAside()
+                    this.$parent[this.closeProp] = false;
                 });
 
             },
             saveAndClose(){
                 this.loading = true;
                 this.saveButtonFunction().then( (resolve) => {
-                    console.log('then');
                     if(this.closeFunction != null){
                         this.closeFunction();
                     }
                     this.loading = false;
-                    this.closeAside()
+                    this.$parent[this.closeProp] = false;
                 }).catch((reject) => {
-                    console.log('Error');
-                    console.log(reject);
-                    this.$message.error('Ocurrio un error en el formulario: '+this.name);
                     this.loading = false;
+                    this.promisesReactions(reject);
                 });
 
+            },
+
+            promisesReactions(payload){
+                switch(payload){
+                    case 'errorMessage':
+                        this.$message.error('Ocurrio un error en el formulario: '+this.name);
+                    default:
+                        console.log('Error');
+                        console.error(reject);
+                }
             }
         }
     }
