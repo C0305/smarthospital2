@@ -1,6 +1,6 @@
 import { layouts } from "./layouts";
-import modelsInventory from './paths';
+import brandsInventory from './paths';
 
 export default () => [
-    ...modelsInventory(layouts)
+    ...brandsInventory(layouts)
 ]
