@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCmmsBrandsTable extends Migration
+class CreateBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ class CreateCmmsBrandsTable extends Migration
     public function up()
     {
         Schema::create('cmms_brands', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->string('website');
-            $table->timestampTz('created_at')->useCurrent();
-            $table->timestampTz('updated_at')->nullable(true);
-            $table->timestampTz('deleted_at')->nullable(true);
+            $table->string('website',1024)->nullable();
+            $table->text('notes')->nullable();
+	        $table->softDeletesTz();
+	        $table->timestamps();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateCmmsBrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cmms_brands');
+        Schema::dropIfExists('brands');
     }
 }
