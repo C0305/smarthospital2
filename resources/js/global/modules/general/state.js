@@ -74,8 +74,12 @@ export default {
         bacabAsideOpen: false,
         bacabNewNotification: false,
         reloadValue: {
-            patients: 0
+            patients: 0,
+            cmss:{
+                brands: 0,
+            }
         }
     },
-    mexicoStates: []
+    mexicoStates: [],
+    routes: []
 }
