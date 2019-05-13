@@ -11,6 +11,9 @@ export default {
     updateMenu(state, payload) {
         state.menu = payload;
     },
+    routesState(state, payload){
+        state.routes = payload
+    },
     bacabUpdateValue(state, payload){
         switch(payload){
             case 'patients':
