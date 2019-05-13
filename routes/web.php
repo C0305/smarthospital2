@@ -19,3 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/show', 'HomeController@show')->name('showData');
+
+Route::group(['prefix' => 'web'], function () {
+	Route::resource('/fileUpload', 'System\UploadFiles');
+	Route::group(['prefix' => '/cmms'], function() {
+		Route::resource('/brands','CMMS\BrandController');
+	});
+});
