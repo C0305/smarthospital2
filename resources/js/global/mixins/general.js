@@ -1,9 +1,15 @@
-export default {
+import { mapState } from 'vuex'
 
-    computed: {
-        mexicoStates(){
-            return this.$store.state.general.mexicoStates
-        }
-    }
+export default {
+    mounted(){
+
+    },
+    methods: {
+    },
+    computed: mapState({
+        mexicoStates: state => state.general.mexicoStates,
+        routes: state => state.general.routes,
+    
+    }),
 
 }
