@@ -63,6 +63,13 @@ class MenuTable extends Seeder
 				        'permission' => 'Ver Inventario de equipos',
 				        'childs'=> null,
 			        ],
+                    [
+                        'name' => 'Catalogo De Modelos',
+                        'path' => '/cmms/modelsInventory',
+                        'icon' => 'fas fa-project-diagram',
+                        'permission' => 'Ver Inventario de equipos',
+                        'childs'=> null,
+                    ],
 //                    [
 //                        'name' => 'Inventario de equipos',
 //                        'path' => '/cmms/equipmentInventory',

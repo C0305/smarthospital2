@@ -1,9 +1,9 @@
 export default layouts => [
     {
-        path: 'cmms/brandsInventory',
+        path: 'cmms/modelsInventory',
         component: layouts.modelsInventory,
         props: route => ({
-            path: 'cmms/brandsInventory',
+            path: 'cmms/modelsInventory',
             back: false
         })
     }
