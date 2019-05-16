@@ -7,15 +7,14 @@
             <el-form :model="form" :rules="formRules" ref="brandsForm" status-icon label-width="120px" >
                 <el-form-item label="Imagenes" prop="images">
                     <el-upload
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            list-type="picture-card"
-                            :on-preview="handlePictureCardPreview"
-                            :on-remove="handleRemove">
-                        <i class="el-icon-plus"></i>
+                            class="avatar-uploader"
+                            action="/web/fileUpload"
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess"
+                            :before-upload="beforeAvatarUpload">
+                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="dialogImageUrl" alt="">
-                    </el-dialog>
                 </el-form-item>
                 <el-form-item label="Marca" prop="name">
                     <el-input size="small" type="text" v-model="form.name" autocomplete="on"></el-input>

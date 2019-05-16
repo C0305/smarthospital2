@@ -3,10 +3,8 @@ export default [
         header: {
             name: 'Imagen',
             prop: 'image',
-            width: '350px',
-            filter: {
-                type: 'input'
-            }
+            width: '100px',
+
         },
         body:{
             type: 'image',
@@ -101,7 +99,7 @@ export default [
             prop: 'voltage',
             width: '350px',
             filter: {
-                type: 'voltage'
+                type: 'input'
             }
         },
         body:{
@@ -117,7 +115,7 @@ export default [
             prop: 'website',
             width: '350px',
             filter: {
-                type: 'website'
+                type: 'input'
             }
         },
         body:{
