@@ -5,5 +5,10 @@ export default {
         val = val + 1;
         console.log(val);
         context.commit('updateBrands',val);
+    },
+    GET_BRANDS_FOR_SELECT(context){
+        axios.get(context.rootState.general.routes.cmms.brands+'/select').then(response => {
+            context.commit('updateBrandsSelect',response.data);
+        })
     }
 }

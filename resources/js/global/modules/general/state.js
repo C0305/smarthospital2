@@ -81,5 +81,6 @@ export default {
         }
     },
     mexicoStates: [],
-    routes: []
+    routes: [],
+    CDN: 'https://s3.amazonaws.com/smarthospital-customers-files/'
 }
