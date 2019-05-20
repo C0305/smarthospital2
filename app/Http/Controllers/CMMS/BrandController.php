@@ -27,17 +27,14 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::select(
-        	'id',
-	        'name',
-	        'website',
-	        'notes'
+            'id',
+            'name',
+            'website',
+            'notes'
         );
-        
-        
-        
         $brands = $this->searchLike($brands,$this->request->all());
-        
         return $brands->paginate($this->request->get('pageSize'));
+
     }
 
     /**
@@ -67,9 +64,18 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type = null)
     {
-        //
+        $model = Brand::select(
+            'id as value',
+            'name as label'
+        );
+        if($type === 'select'){
+            return [
+                'brandsArray' => $model->get(),
+                'numberOfRecords' => $model->count()
+            ];
+        }
     }
 
     /**
