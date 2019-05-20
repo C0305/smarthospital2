@@ -118,7 +118,8 @@
         },
         mounted(){
 
-            this.open('/home', 'Home')
+            //this.open('/home', 'Home')
+            this.open('/cmms/modelsCatalog', 'Catalogo De Modelos')
             /* Scripts for css grid dashboard */
 
             $(document).ready(() => {

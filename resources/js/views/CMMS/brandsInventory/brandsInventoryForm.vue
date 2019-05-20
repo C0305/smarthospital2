@@ -35,14 +35,16 @@
         methods: {
             submitForm()
             {
+                let $returnData;
                 this.$refs.brandsForm.validate((valid) => {
                     if (valid) {
-                        return true;
+                        $returnData = true;
                     } else {
                         console.log('error submit!!');
-                        return false;
+                        $returnData = false;
                     }
                 });
+                return $returnData;
             }
         }
     };
