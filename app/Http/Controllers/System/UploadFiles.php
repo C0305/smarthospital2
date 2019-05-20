@@ -44,8 +44,7 @@ class UploadFiles extends Controller
      */
     public function store(Request $request)
     {
-    	//$name = Str::random(40);
-	    $path = Storage::disk('s3')->put('tmp/', $request->file);
+	    $path = Storage::disk('s3')->put('tmp', $request->file('file'),'public');
 		return $path;
     }
 

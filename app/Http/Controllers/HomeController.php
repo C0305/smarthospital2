@@ -52,6 +52,9 @@ class HomeController extends Controller
     private function getRoutes()
     {
         return [
+            'system' => [
+                'upload' => '/web/fileUpload '
+            ],
             'cmms' => [
             	'brands' => '/web/cmms/brands'
             ]

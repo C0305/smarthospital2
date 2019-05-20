@@ -9,7 +9,7 @@ export default {
     computed: mapState({
         mexicoStates: state => state.general.mexicoStates,
         routes: state => state.general.routes,
-    
+        CDN: state => state.general.CDN
     }),
 
 }
