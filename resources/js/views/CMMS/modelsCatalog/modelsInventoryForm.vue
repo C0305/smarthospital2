@@ -5,65 +5,116 @@
         </div>
         <div class="box__body">
             <el-form label-position="top" :model="form" :rules="formRules" ref="brandsForm" status-icon label-width="120px" >
-                <el-row :gutter="20">
-                    <el-col :span="8">
+                <el-tabs type="border-card">
+                    <el-tab-pane>
+                        <span slot="label"><i class="el-icon-grape"></i> General</span>
+                        <el-row :gutter="20">
+                            <el-col :span="8">
+                                <el-upload
+                                        class="avatar-uploader"
+                                        :action="routes.system.upload"
+                                        :show-file-list="false"
+                                        :headers="headerObject"
+                                        :on-success="handleAvatarModelSuccess">
+                                    <img v-if="imgSrc" :src="imgSrc" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="Marca" prop="name">
+                                    <el-select style="width: 100%" v-model="form.brand_id" placeholder="Marca">
+                                        <el-option
+                                                v-for="item in selectBrands.brandsArray"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="Nombre/Modelo" prop="website">
+                                    <el-input type="text" size="small" v-model="form.name" autocomplete="off"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="20">
+                            <el-col>
+                                <el-form-item label="Categoría" prop="note">
+                                    <el-select style="width: 100%" v-model="form.category_id" placeholder="Categoría">
+                                        <el-option
+                                                v-for="item in selectCategories"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="20">
+                            <el-col>
+                                <el-form-item label="Subcategoría" prop="note">
+                                    <el-select style="width: 100%" v-model="form.subcategory_id" placeholder="Subcategoría">
+                                        <el-option
+                                                v-for="item in selectSubCategories"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="20">
+                            <el-col>
+                                <el-form-item label="RFAAC" prop="note">
+                                    <el-select style="width: 100%" v-model="form.rfaac" placeholder="RFAAC">
+                                        <el-option
+                                                v-for="item in selectRfaac"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="20">
+                            <el-col>
+                                <el-form-item label="Website" prop="note">
+                                    <el-input size="small" type="text" v-model="form.website" autocomplete="on"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="20">
+                            <el-col>
+                                <el-form-item label="voltage" prop="note">
+                                    <el-input size="small" type="text" v-model="form.voltage" autocomplete="on"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="20">
+                            <el-col>
+                                <el-form-item label="Notas" prop="note">
+                                    <el-input size="small" type="textarea" v-model="form.note" autocomplete="on"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
+                    <el-tab-pane>
+                        <span slot="label"><i class="el-icon-files"></i> File</span>
                         <el-upload
-                                class="avatar-uploader"
+                                class="upload-demo"
                                 :action="routes.system.upload"
-                                :show-file-list="false"
+                                :on-success="fileSuccess"
+                                multiple
+                                :on-remove="fileRemoved"
                                 :headers="headerObject"
-                                :on-success="handleAvatarModelSuccess">
-                            <img v-if="imgSrc" :src="imgSrc" class="avatar">
-                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                :file-list="form.files">
+                            <el-button size="small" type="primary">Click to upload</el-button>
+                            <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
                         </el-upload>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="Marca" prop="name">
-                            <el-select style="width: 100%" v-model="form.brand_id" placeholder="Marca">
-                                <el-option
-                                        v-for="item in selectBrands.brandsArray"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label="Nombre/Modelo" prop="website">
-                            <el-input type="text" size="small" v-model="form.name" autocomplete="off"></el-input>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-
-                <el-row :gutter="20">
-                    <el-col>
-                        <el-form-item label="Categoría" prop="note">
-                            <el-select style="width: 100%" v-model="form.category_id" placeholder="Categoría">
-                                <el-option
-                                        v-for="item in selectCategories"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col>
-                        <el-form-item label="Subcategoría" prop="note">
-                            <el-select style="width: 100%" v-model="form.subcategory_id" placeholder="Subcategoría">
-                                <el-option
-                                        v-for="item in selectSubCategories"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-
-                    <el-form-item label="Notas" prop="note">
-                        <el-input size="small" type="textarea" v-model="form.note" autocomplete="on"></el-input>
-                    </el-form-item>
-                </el-row>
+                    </el-tab-pane>
+                </el-tabs>
             </el-form>
         </div>
     </div>
@@ -112,8 +163,14 @@
             }
         },
         methods: {
+            fileRemoved(file, fileList){
+                this.form.files = Object.assign({},fileList);
+            },
             handleAvatarModelSuccess(response,file) {
                 this.imgSrc = this.CDN+ response.replace('//','/');
+            },
+            fileSuccess(response, file, fileList){
+                this.form.files = Object.assign({},fileList);
             },
             submitForm()
             {

@@ -7,7 +7,7 @@ export default {
     subcategory_id: '',
     rfaac: '',
     description: '',
-    hospital_id: '',
     voltage: '',
-    website: ''
+    website: '',
+    files: []
 }

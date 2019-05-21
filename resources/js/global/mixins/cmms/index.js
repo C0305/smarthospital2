@@ -11,6 +11,7 @@ export default {
         updateBrands: state => state.cmms.updateValues.brands,
         selectBrands: state => state.cmms.brands,
         selectCategories: state => state.cmms.categories,
-        selectSubCategories: state => state.cmms.subCategories
+        selectSubCategories: state => state.cmms.subCategories,
+        selectRfaac: state => state.cmms.rfaac
     }),
 }
