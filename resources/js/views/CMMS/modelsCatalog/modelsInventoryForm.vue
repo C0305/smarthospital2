@@ -107,6 +107,7 @@
                                 :action="routes.system.upload"
                                 :on-success="fileSuccess"
                                 multiple
+                                :on-preview="onPreview"
                                 :on-remove="fileRemoved"
                                 :headers="headerObject"
                                 :file-list="form.files">
@@ -172,16 +173,21 @@
             fileSuccess(response, file, fileList){
                 this.form.files = Object.assign({},fileList);
             },
+            onPreview(a,){
+                 window.open(this.CDN + a.response);
+            },
             submitForm()
             {
+                $returnData = null;
                 this.$refs.brandsForm.validate((valid) => {
                     if (valid) {
-                        return true;
+                        $returnData = true;
                     } else {
                         console.log('error submit!!');
-                        return false;
+                        $returnData = false;
                     }
                 });
+                return $returnData
             }
         }
     };
