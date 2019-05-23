@@ -93,12 +93,12 @@
              return new Promise((resolve,reject) => {
                  if(this.$refs.formComponent1.submitForm() === true){
                      if(this.dataForm .id !== 0){
-                         let ajax = new BacabAjax(this.routes.cmms.brands, this.dataForm,this);
-                         ajax.store('cmms/UPDATE_BRANDS');
+                         let ajax = new BacabAjax(this.routes.cmms.models, this.dataForm,this);
+                         ajax.store('cmms/UPDATE_MODELS');
                          resolve()
                      } else {
                          let ajax = new BacabAjax(`${this.routes.cmms.brands}/${this.dataForm.id}`, this.dataForm, this);
-                         ajax.update('cmms/UPDATE_BRANDS');
+                         ajax.update('cmms/UPDATE_MODELS');
                          resolve()
                      }
                  } else {

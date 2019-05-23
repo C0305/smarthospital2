@@ -126,7 +126,7 @@ class ModelController extends Controller
     		$doc['model_id'] = $model;
     		CmmsModelDocument::updateOrCreate(['id' => $doc['id']],$doc);
 		}
-  
+
 		return $model;
 	}
 }
