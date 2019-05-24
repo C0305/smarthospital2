@@ -16,3 +16,8 @@ public/.DS_Store
 .idea/*
 public/js/app.js
 public/css/app.css
+public/css/app.css
+public/js/app.js
+.idea/dataSources.xml
+.idea/php.xml
+.idea/smarthospital.iml
