@@ -10,7 +10,7 @@ class CmmsModel extends Model
 {
 	use SoftDeletes;
 	
-	private $fillable = [
+	protected $fillable = [
 	    'name',
         'image',
 	    'model',

@@ -6,7 +6,7 @@
                      save-button
                      :save-button-function="saveForm">
             <template slot="content">
-                <models-inventory-form ref="formComponent1"/>
+                <models-inventory-form ref="formComponentModel"/>
             </template>
         </bacab-aside>
         <div class="header-buttons">
@@ -22,8 +22,8 @@
         </div>
         <div class="main-panel">
             <bacab-tables title="Listado de Marcas"
-                          :update-value="updateBrands"
-                          :remote-url="routes.cmms.brands"
+                          :update-value="updateModels"
+                          :remote-url="routes.cmms.models"
                           :table-config="tableConfig">
                 <template slot="actionSlot"  slot-scope="obj">
                     <div style="right: 0">
@@ -91,18 +91,27 @@
          },
          saveForm() {
              return new Promise((resolve,reject) => {
-                 if(this.$refs.formComponent1.submitForm() === true){
-                     if(this.dataForm .id !== 0){
-                         let ajax = new BacabAjax(this.routes.cmms.models, this.dataForm,this);
+                 let result = this.$refs.formComponentModel.submitForm();
+                 console.log(result);
+                 if(result){
+                     let form = Object.assign({},this.dataForm);
+                     for(form.files in item){
+                         delete item.raw
+                         delete item.status
+                         delete item.percentage
+                     }
+                     console.log(form);
+                     if(form.id !== 0){
+                         let ajax = new BacabAjax(this.routes.cmms.models, form,this);
                          ajax.store('cmms/UPDATE_MODELS');
                          resolve()
                      } else {
-                         let ajax = new BacabAjax(`${this.routes.cmms.brands}/${this.dataForm.id}`, this.dataForm, this);
+                         let ajax = new BacabAjax(`${this.routes.cmms.brands}/${form.id}`, form, this);
                          ajax.update('cmms/UPDATE_MODELS');
                          resolve()
                      }
                  } else {
-                     reject('noMessage');
+                     reject(result);
                  }
              })
          }

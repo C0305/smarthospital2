@@ -56,7 +56,8 @@ class HomeController extends Controller
                 'upload' => '/web/fileUpload '
             ],
             'cmms' => [
-            	'brands' => '/web/cmms/brands'
+                'brands' => '/web/cmms/brands',
+                'models' => '/web/cmms/models'
             ]
         ];
     }

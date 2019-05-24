@@ -89,7 +89,7 @@
                         this.$message.error('Ocurrio un error en el formulario: '+this.name);
                     default:
                         console.log('Error');
-                        console.error(reject);
+                        console.error(payload);
                 }
             }
         }

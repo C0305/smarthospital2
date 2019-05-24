@@ -9,5 +9,5 @@ export default {
     description: '',
     voltage: '',
     website: '',
-    files: []
+    files: {}
 }

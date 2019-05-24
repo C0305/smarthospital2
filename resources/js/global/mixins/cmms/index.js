@@ -9,6 +9,7 @@ export default {
     },
     computed: mapState({
         updateBrands: state => state.cmms.updateValues.brands,
+        updateModels: state => state.cmms.updateValues.models,
         selectBrands: state => state.cmms.brands,
         selectCategories: state => state.cmms.categories,
         selectSubCategories: state => state.cmms.subCategories,

@@ -21,7 +21,7 @@
                                 </el-upload>
                             </el-col>
                             <el-col :span="12">
-                                <el-form-item label="Marca" prop="name">
+                                <el-form-item label="Marca" prop="brand_id">
                                     <el-select style="width: 100%" v-model="form.brand_id" placeholder="Marca">
                                         <el-option
                                                 v-for="item in selectBrands.brandsArray"
@@ -31,14 +31,14 @@
                                         </el-option>
                                     </el-select>
                                 </el-form-item>
-                                <el-form-item label="Nombre/Modelo" prop="website">
+                                <el-form-item label="Nombre/Modelo" prop="name">
                                     <el-input type="text" size="small" v-model="form.name" autocomplete="off"></el-input>
                                 </el-form-item>
                             </el-col>
                         </el-row>
                         <el-row :gutter="20">
                             <el-col>
-                                <el-form-item label="Categoría" prop="note">
+                                <el-form-item label="Categoría" prop="category_id">
                                     <el-select style="width: 100%" v-model="form.category_id" placeholder="Categoría">
                                         <el-option
                                                 v-for="item in selectCategories"
@@ -52,7 +52,7 @@
                         </el-row>
                         <el-row :gutter="20">
                             <el-col>
-                                <el-form-item label="Subcategoría" prop="note">
+                                <el-form-item label="Subcategoría" prop="subcategory_id">
                                     <el-select style="width: 100%" v-model="form.subcategory_id" placeholder="Subcategoría">
                                         <el-option
                                                 v-for="item in selectSubCategories"
@@ -66,7 +66,7 @@
                         </el-row>
                         <el-row :gutter="20">
                             <el-col>
-                                <el-form-item label="RFAAC" prop="note">
+                                <el-form-item label="RFAAC" prop="rfaac">
                                     <el-select style="width: 100%" v-model="form.rfaac" placeholder="RFAAC">
                                         <el-option
                                                 v-for="item in selectRfaac"
@@ -80,14 +80,14 @@
                         </el-row>
                         <el-row :gutter="20">
                             <el-col>
-                                <el-form-item label="Website" prop="note">
+                                <el-form-item label="Website" prop="website">
                                     <el-input size="small" type="text" v-model="form.website" autocomplete="on"></el-input>
                                 </el-form-item>
                             </el-col>
                         </el-row>
                         <el-row :gutter="20">
                             <el-col>
-                                <el-form-item label="voltage" prop="note">
+                                <el-form-item label="voltage" prop="voltage">
                                     <el-input size="small" type="text" v-model="form.voltage" autocomplete="on"></el-input>
                                 </el-form-item>
                             </el-col>
@@ -110,7 +110,7 @@
                                 :on-preview="onPreview"
                                 :on-remove="fileRemoved"
                                 :headers="headerObject"
-                                :file-list="form.files">
+                                :file-list="fileList">
                             <el-button size="small" type="primary">Click to upload</el-button>
                             <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
                         </el-upload>
@@ -160,7 +160,8 @@
                 form: this.$parent.$parent.dataForm,
                 headerObject: {'X-CSRF-TOKEN': window.tokenfrsc.content},
                 formRules,
-                imgSrc: ''
+                imgSrc: '',
+                fileList: []
             }
         },
         methods: {
@@ -178,7 +179,7 @@
             },
             submitForm()
             {
-                $returnData = null;
+                let $returnData = null;
                 this.$refs.brandsForm.validate((valid) => {
                     if (valid) {
                         $returnData = true;

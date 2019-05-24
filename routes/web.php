@@ -23,6 +23,7 @@ Route::get('/show', 'HomeController@show')->name('showData');
 Route::group(['prefix' => 'web'], function () {
 	Route::resource('/fileUpload', 'System\UploadFiles');
 	Route::group(['prefix' => '/cmms'], function() {
-		Route::resource('/brands','CMMS\BrandController');
+        Route::resource('/brands','CMMS\BrandController');
+        Route::resource('/models', 'CMMS\ModelController');
 	});
 });

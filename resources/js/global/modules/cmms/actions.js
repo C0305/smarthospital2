@@ -10,5 +10,12 @@ export default {
         axios.get(context.rootState.general.routes.cmms.brands+'/select').then(response => {
             context.commit('updateBrandsSelect',response.data);
         })
+    },
+    UPDATE_MODELS(context){
+        console.log('Executed Action');
+        let val = context.state.updateValues.models;
+        val = val + 1;
+        console.log(val);
+        context.commit('updateModels', val);
     }
 }
