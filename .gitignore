@@ -21,3 +21,5 @@ public/js/app.js
 .idea/dataSources.xml
 .idea/php.xml
 .idea/smarthospital.iml
+public/css/app.css
+public/js/app.js
