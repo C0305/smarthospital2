@@ -95,12 +95,11 @@
                  console.log(result);
                  if(result){
                      let form = Object.assign({},this.dataForm);
-                     for(form.files in item){
-                         delete item.raw
-                         delete item.status
-                         delete item.percentage
+                     for(let i = 0; i < form.files.length; i++){
+                         delete form.files[i].raw
+                         delete form.files[i].status
+                         delete form.files[i].percentage
                      }
-                     console.log(form);
                      if(form.id !== 0){
                          let ajax = new BacabAjax(this.routes.cmms.models, form,this);
                          ajax.store('cmms/UPDATE_MODELS');

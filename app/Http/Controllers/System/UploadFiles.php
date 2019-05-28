@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SmartHospital\Http\Controllers\Controller;
+use SmartHospital\Models\System\documentManagerDocument ;
 
 class UploadFiles extends Controller
 {
@@ -77,9 +78,13 @@ class UploadFiles extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public static function update($action, $payloadOne, $payloadTwo)
     {
-        //
+        if($action === 'move'){
+            self::moveOne($payloadOne,$payloadTwo);
+        } else if ('saveOnDatabase'){
+        	return documentManagerDocument::updateOrCreate(['id' => $payloadOne['id']],$payloadOne);
+        }
     }
 
     /**
@@ -88,8 +93,14 @@ class UploadFiles extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($deleteFiles)
     {
-        //
+	    return Storage::disk('s3')->delete($deleteFiles);
     }
+    
+    private function moveOne($origin,$end)
+    {
+    	return Storage::disk('s3')->move($origin,$end);
+    }
+
 }

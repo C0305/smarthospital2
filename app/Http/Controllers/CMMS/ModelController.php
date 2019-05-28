@@ -3,8 +3,10 @@
 namespace SmartHospital\Http\Controllers\CMMS;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use SmartHospital\Http\Controllers\Controller;
+use SmartHospital\Http\Controllers\System\UploadFiles;
 use SmartHospital\Http\Traits\Search\NormalSearch;
 use SmartHospital\Models\CMMS\CmmsModel;
 use SmartHospital\Models\CMMS\CmmsModelDocument;
@@ -60,9 +62,9 @@ class ModelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        return $request->all();
+    
     }
 
     /**
@@ -118,15 +120,26 @@ class ModelController extends Controller
     }
 	
 	private function updateOrCreate($data){
-    	
-    	$documents = $data['documents'];
-    	unset($data['documents']);
+		
+		
+    	$data['files'];
+    	$documents = [];
     	$model = CmmsModel::updateOrCreate(['id' => $data['id']],$data);
-    	foreach ($documents as $doc) {
-    		$doc['model_id'] = $model;
-    		CmmsModelDocument::updateOrCreate(['id' => $doc['id']],$doc);
+		foreach ($documents as $file){
+			$trimmed = str_replace('tmp/', '', $file['response']);
+			UploadFiles::update('move','tmp/'+$trimmed,'cmms/model/'+$trimmed);
+			array_push($documents,[
+				'name' => $file['name'],
+				'size' => $file['size'],
+				'route' => 'cmms/model/'+$trimmed,
+				'user_id' => Auth::id(),
+				'model_id' => $model,
+				'model_type' => $model->getNamespaceName(),
+				'document_type' => substr($file['name'],strrpos($file['name'], '.')+1),
+				'uid' => $file['uid']
+			]);
+			
 		}
-
 		return $model;
 	}
 }
