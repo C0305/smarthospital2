@@ -16,12 +16,13 @@ class CreateDocumentManagerDocumentsTable extends Migration
         Schema::create('document_manager_documents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('document');
-            $table->string('description');
-            $table->string('route');
-            $table->string('url');
-            $table->string('type');
+            $table->string('size');
+            $table->string('route', 2048);
             $table->integer('user_id');
+            $table->integer('model_id');
+            $table->string('model_type');
+            $table->string('document_type');
+            $table->integer('uid');
             $table->softDeletesTz();
             $table->timestamps();
         });
