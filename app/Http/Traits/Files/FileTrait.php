@@ -30,15 +30,23 @@
             }
         }
 
-        private function fileRollback($oldFile,$routes){
+        /**
+         * Funcion que permite el rollback de los archivos y asi regresarlos
+         * a la carpeta temporal
+         */
+        private function fileRollback($oldFile,$routes)
+        {
             try {
-                    $trimmed = str_replace('tmp/', '', $oldFile);
-                    UploadFiles::update('move', $routes[1] + $trimmed, +$routes[0] + $trimmed);
+                $trimmed = str_replace('tmp/', '', $oldFile);
+                UploadFiles::update('move', $routes[1] + $trimmed, +$routes[0] + $trimmed);
             } catch (\Exception $e) {
                 return $e;
             }
         }
-
+        /**
+         * Retorna la ruta del archivo que se movio
+         * 
+         */
         private function trimAndMove($file,$route)
         {
             try {
