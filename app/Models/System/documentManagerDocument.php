@@ -8,11 +8,12 @@ class documentManagerDocument extends Model
 {
     protected $fillable = [
     	'name',
-	    'document',
-	    'description',
+	    'size',
 	    'route',
-	    'url',
-	    'type',
-	    'user_id'
+	    'user_id',
+	    'model_id',
+	    'model_type',
+	    'document_type',
+	    'uid'
     ];
 }

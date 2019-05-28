@@ -166,13 +166,13 @@
         },
         methods: {
             fileRemoved(file, fileList){
-                this.form.files = Object.assign({},fileList);
+                this.form.files = Object.values(Object.assign({},fileList));
             },
             handleAvatarModelSuccess(response,file) {
                 this.imgSrc = this.CDN+ response.replace('//','/');
             },
             fileSuccess(response, file, fileList){
-                this.form.files = Object.assign({},fileList);
+                this.form.files = Object.values(Object.assign({},fileList));
             },
             onPreview(a,){
                  window.open(this.CDN + a.response);
