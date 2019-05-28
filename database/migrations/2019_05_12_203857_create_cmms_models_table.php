@@ -15,10 +15,10 @@ class CreateCmmsModelsTable extends Migration
     {
         Schema::create('cmms_models', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('model');
-            $table->integer('brand_id');
+            $table->string( 'name')->nullable();
+            $table->text( 'image');
             $table->text('description')->nullable();
+            $table->integer('brand_id');
             $table->integer('subcategory_id');
             $table->integer('category_id');
             $table->integer('rfaac');
