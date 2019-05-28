@@ -13,7 +13,6 @@ class CmmsModel extends Model
 	protected $fillable = [
 	    'name',
         'image',
-	    'model',
 	    'brand_id',
 	    'description',
 	    'subcategory_id',
