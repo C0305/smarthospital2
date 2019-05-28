@@ -170,6 +170,7 @@
             },
             handleAvatarModelSuccess(response,file) {
                 this.imgSrc = this.CDN+ response.replace('//','/');
+                this.form.image = response.replace('//','/');
             },
             fileSuccess(response, file, fileList){
                 this.form.files = Object.values(Object.assign({},fileList));
