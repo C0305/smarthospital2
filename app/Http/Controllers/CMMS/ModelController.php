@@ -3,17 +3,17 @@
 namespace SmartHospital\Http\Controllers\CMMS;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use SmartHospital\Http\Controllers\Controller;
-use SmartHospital\Http\Controllers\System\UploadFiles;
 use SmartHospital\Http\Traits\Search\NormalSearch;
 use SmartHospital\Models\CMMS\CmmsModel;
-use SmartHospital\Models\CMMS\CmmsModelDocument;
+
+use SmartHospital\Http\Traits\Files\FileTrait;
 
 class ModelController extends Controller
 {
-	use NormalSearch;
+    use NormalSearch;
+    use FileTrait;
 	private $request;
 	
 	public function __construct(Request $request)
@@ -64,7 +64,7 @@ class ModelController extends Controller
      */
     public function store()
     {
-    
+        return $this->updateOrCreate($this->request->all());
     }
 
     /**
@@ -122,24 +122,29 @@ class ModelController extends Controller
 	private function updateOrCreate($data){
 		
 		
-    	$data['files'];
-    	$documents = [];
-    	$model = CmmsModel::updateOrCreate(['id' => $data['id']],$data);
-		foreach ($documents as $file){
-			$trimmed = str_replace('tmp/', '', $file['response']);
-			UploadFiles::update('move','tmp/'+$trimmed,'cmms/model/'+$trimmed);
-			array_push($documents,[
-				'name' => $file['name'],
-				'size' => $file['size'],
-				'route' => 'cmms/model/'+$trimmed,
-				'user_id' => Auth::id(),
-				'model_id' => $model,
-				'model_type' => $model->getNamespaceName(),
-				'document_type' => substr($file['name'],strrpos($file['name'], '.')+1),
-				'uid' => $file['uid']
-			]);
-			
-		}
-		return $model;
-	}
+        $oldDocuments = $data['files'];
+        $oldImage = $data['image'];
+
+        unset( $data['files']);
+
+        $documents = $this->generateDocumentsArray( $oldDocuments, 'cmms/model/');
+
+        DB::beginTransaction();
+        try {
+            $data['image'] = $this->trimAndMove( $data['image'], 'cmms/model/');
+            $model = CmmsModel::updateOrCreate(['id' => $data['id']], $data);
+            $this->saveFiles( $documents, $model);
+            DB::commit();
+            return $model->id;
+        } catch(\Exception $e) {
+            DB::rollBack();
+            return [
+                'Error' => $e,
+                'FilesMove' => $this->filesRollback($oldDocuments, ['tmp/', 'cmms/model/']),
+                'FileMove' => $this->fileRollback($oldImage,['tmp/', 'cmms/model/'])
+            ];
+        }
+    }
+    
+    
 }
