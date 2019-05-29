@@ -7,9 +7,9 @@
     use SmartHospital\Http\Controllers\System\UploadFiles;
     use SmartHospital\Models\System\documentManagerDocument;
     use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
-	
-	trait FileTrait
+trait FileTrait
 	{
 
         /**
@@ -49,9 +49,17 @@
          */
         private function trimAndMove($file,$route)
         {
+            if(is_array($file)){
+                $oneRoute = $file['response'];
+            } else {
+                $oneRoute = $file;
+            }
+            Log::info($oneRoute);
             try {
-                $trimmed = str_replace('tmp/', '', $file['response']);
+                $trimmed = str_replace('tmp/', '', $oneRoute);
+                Log::info($trimmed);
                 UploadFiles::update('move', 'tmp/' + $trimmed, $route + $trimmed);
+                Log::info($route + $trimmed);
                 return $route + $trimmed;
             } catch (\Exception $e) {
                 return $e;

@@ -161,7 +161,8 @@
                 headerObject: {'X-CSRF-TOKEN': window.tokenfrsc.content},
                 formRules,
                 imgSrc: '',
-                fileList: []
+                fileList: [],
+                mainImage: ''
             }
         },
         methods: {
@@ -169,8 +170,9 @@
                 this.form.files = Object.values(Object.assign({},fileList));
             },
             handleAvatarModelSuccess(response,file) {
-                this.imgSrc = this.CDN+ response.replace('//','/');
-                this.form.image = response.replace('//','/');
+                this.mainImage = response;
+                this.imgSrc = this.CDN + response.replace('//','/');
+                this.form.image = response;
             },
             fileSuccess(response, file, fileList){
                 this.form.files = Object.values(Object.assign({},fileList));

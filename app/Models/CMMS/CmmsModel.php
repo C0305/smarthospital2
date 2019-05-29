@@ -21,4 +21,8 @@ class CmmsModel extends Model
 	    'voltage',
 	    'website',
 	];
+
+	public function files(){
+		return $this->hasMany('SmartHospital\Models\System\documentManagerDocument','model_id');
+	}
 }

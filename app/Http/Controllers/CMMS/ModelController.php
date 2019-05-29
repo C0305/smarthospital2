@@ -9,6 +9,7 @@ use SmartHospital\Http\Traits\Search\NormalSearch;
 use SmartHospital\Models\CMMS\CmmsModel;
 
 use SmartHospital\Http\Traits\Files\FileTrait;
+use Illuminate\Support\Facades\Log;
 
 class ModelController extends Controller
 {
@@ -31,7 +32,6 @@ class ModelController extends Controller
         	'id',
 	        'image',
 	        'name',
-	        'model',
 	        'brand_id',
 	        'description',
 	        'subcategory_id',
@@ -39,7 +39,7 @@ class ModelController extends Controller
 	        'rfaac',
 	        'voltage',
 	        'website'
-        );
+        )->with('files');
         $noSearch = ['image'];
 	    $models = $this->searchLike($models,$this->request->all(),$noSearch);
 	    return $models->paginate($this->request->get('pageSize'));
@@ -132,6 +132,7 @@ class ModelController extends Controller
         DB::beginTransaction();
         try {
             $data['image'] = $this->trimAndMove( $data['image'], 'cmms/model/');
+            Log::info($data['image']);
             $model = CmmsModel::updateOrCreate(['id' => $data['id']], $data);
             $this->saveFiles( $documents, $model);
             DB::commit();

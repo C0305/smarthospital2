@@ -18,5 +18,7 @@ class documentManagerDocument extends Model
 	    'model_type',
 	    'document_type',
 	    'uid'
-    ];
+	];
+	
+	
 }
