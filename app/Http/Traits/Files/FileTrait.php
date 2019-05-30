@@ -5,9 +5,9 @@
     
     
     use SmartHospital\Http\Controllers\System\UploadFiles;
-    use SmartHospital\Models\System\documentManagerDocument;
     use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+    use Illuminate\Support\Facades\Log;
+
 
 trait FileTrait
 	{
@@ -23,7 +23,7 @@ trait FileTrait
             try{
                 foreach ($requestArray as $document) {
                     $trimmed = str_replace('tmp/', '', $document['response']);
-                    UploadFiles::update('move', $routes[1] + $trimmed, + $routes[0] + $trimmed);
+                    UploadFiles::update('move', $routes[1].$trimmed,  $routes[0].$trimmed);
                 }
             } catch (\Exception $e) {
                 return $e;
@@ -38,7 +38,7 @@ trait FileTrait
         {
             try {
                 $trimmed = str_replace('tmp/', '', $oldFile);
-                UploadFiles::update('move', $routes[1] + $trimmed, +$routes[0] + $trimmed);
+                UploadFiles::update('move', $routes[1].$trimmed, $routes[0].$trimmed);
             } catch (\Exception $e) {
                 return $e;
             }
@@ -54,13 +54,11 @@ trait FileTrait
             } else {
                 $oneRoute = $file;
             }
-            Log::info($oneRoute);
             try {
                 $trimmed = str_replace('tmp/', '', $oneRoute);
-                Log::info($trimmed);
-                UploadFiles::update('move', 'tmp/' + $trimmed, $route + $trimmed);
-                Log::info($route + $trimmed);
-                return $route + $trimmed;
+                $uploader = new UploadFiles();
+                $uploader->update('move', $oneRoute, $route.$trimmed);
+                return $route.$trimmed;
             } catch (\Exception $e) {
                 return $e;
             }
@@ -85,11 +83,14 @@ trait FileTrait
 
         private function saveFiles( $documents, $model)
         {
+            Log::info('salvar archivo en la base de datos');
             try{
                 foreach ($documents as $document) {
                     $document['model_id'] = $model->id;
                     $document['model_type'] = $model->getNamespaceName();
-                    documentManagerDocument::updateOrCreate(['uid' => $document['uid']], $document);
+                    Log::info('After save file');
+                    UploadFiles::update('saveOnDatabase', $document, null);
+
                 }
             } catch(\Exception $e) {
                 return $e;

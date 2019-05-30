@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\DB;
 use SmartHospital\Http\Controllers\Controller;
 use SmartHospital\Http\Traits\Search\NormalSearch;
 use SmartHospital\Models\CMMS\CmmsModel;
+use Illuminate\Support\Facades\Log;
+
 
 use SmartHospital\Http\Traits\Files\FileTrait;
-use Illuminate\Support\Facades\Log;
 
 class ModelController extends Controller
 {
@@ -132,8 +133,8 @@ class ModelController extends Controller
         DB::beginTransaction();
         try {
             $data['image'] = $this->trimAndMove( $data['image'], 'cmms/model/');
-            Log::info($data['image']);
             $model = CmmsModel::updateOrCreate(['id' => $data['id']], $data);
+            Log::info( 'si llega aqui antes de $this->saveFiles( $documents, $model);');
             $this->saveFiles( $documents, $model);
             DB::commit();
             return $model->id;

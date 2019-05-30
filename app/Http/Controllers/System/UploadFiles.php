@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SmartHospital\Http\Controllers\Controller;
 use SmartHospital\Models\System\documentManagerDocument ;
+use Illuminate\Support\Facades\Log;
+
 
 class UploadFiles extends Controller
 {
@@ -78,12 +80,19 @@ class UploadFiles extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public static function update($action, $payloadOne, $payloadTwo)
+    public  function update($action, $payloadOne, $payloadTwo)
     {
-        if($action === 'move'){
-            self::moveOne($payloadOne,$payloadTwo);
-        } else if ('saveOnDatabase'){
-        	return documentManagerDocument::updateOrCreate(['id' => $payloadOne['id']],$payloadOne);
+        Log::info( 'si entra aqui update');
+        Log::info( $action);
+        switch($action) {
+            case 'move':
+                Log::info('movee');
+                return $this->moveOne($payloadOne, $payloadTwo = null);
+            case 'saveOnDatabase':
+                Log::info('save');
+                return documentManagerDocument::updateOrCreate(['id' => $payloadOne['id']], $payloadOne);
+            default:
+                return 'nothing to do';
         }
     }
 
@@ -100,7 +109,12 @@ class UploadFiles extends Controller
     
     private function moveOne($origin,$end)
     {
-    	return Storage::disk('s3')->move($origin,$end);
+        Log::info( 'si entra aqui moveOne');
+    	try{
+            return Storage::disk('s3')->move($origin, $end);
+        } catch (\Exception $e){
+            return $e;
+        }
     }
 
 }
