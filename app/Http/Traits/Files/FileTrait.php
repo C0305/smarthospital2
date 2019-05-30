@@ -83,7 +83,7 @@ trait FileTrait
 
         private function saveFiles( $documents, $model)
         {
-            Log::info('salvar archivo en la base de datos');
+            Log::info('salvar archivo en la base de datos antes del try');
             try{
                 foreach ($documents as $document) {
                     $document['model_id'] = $model->id;
